@@ -1,0 +1,93 @@
+---
+title: "hw2"
+author: "HanSun, HanSun97"
+date: "2020.2.7"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Rcommands
+### Question 1
+```{r}
+celsius <- function(fahrenheit){
+  cel <- ((fahrenheit-32)*(5/9))
+  print(cel)
+}
+celsius(24)
+celsius(15)
+```
+
+### Question 2
+```{r}
+vec200 <- 0
+for (i in 1:200){
+  if ((i%%2)==0)
+    vec200[i] <- 1
+  else
+    vec200[i] <- 3
+}
+vec200
+```
+
+### Question 3
+```{r}
+numPerfect <- 0
+for (i in 1:2001) {
+  num <- 1
+  while ((num*num) <= i) {
+    if ((num*num) == i)
+      numPerfect = numPerfect + 1
+    num = num + 1
+  }
+  i = i + 1
+}
+print(numPerfect)
+```
+
+## Cars and mileage
+```{r}
+library(ggplot2)
+head(mpg)
+```
+
+### Question 1
+```{r}
+sort(mpg$hwy,decreasing = TRUE)[1:3]
+top3 <- mpg[mpg$hwy == 44|mpg$hwy == 41,]
+top3
+
+```
+
+### Quesiton 2
+```{r}
+Compact <- mpg[mpg$class == 'compact',]
+numCompact <- nrow(Compact)
+numCompact
+```
+
+### Question 3
+```{r}
+plot(mpg$hwy,mpg$cty)
+```
+
+In this case, there are multiple points on the scatterplot having the same coordinates. Some of the these points overlap each other.
+
+### Question 4
+```{r}
+mpg2008 <- mpg[mpg$year == 2008,]
+mpg1999 <- mpg[mpg$year == 1999,]
+par(mfrow = c(2,2))
+hist(mpg2008$cty, main = "histogram of cty(2008)")
+hist(mpg2008$hwy, main = "histogram of hwy(2008)")
+hist(mpg1999$cty, main = "histogram of cty(1999)")
+hist(mpg1999$hwy, main = "histogram of hwy(1999)")
+par(mfrow = c(1,1))
+plot(mpg2008$cty,mpg2008$hwy,col='red',xlab = 'cty',ylab = 'hwy')
+points(mpg1999$cty,mpg1999$hwy,col='green')
+
+```
+
+In the highway, it shows if the car is more efficient in a high speed. In the city, it shows if the the car is more efficient in a low speed. There are more cars in 15-30 hwy in 1999 and more cars in 10-20 cty in 1999, which means, the cars are more fuel efficient in 1999.
